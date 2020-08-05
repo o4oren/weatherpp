@@ -2,6 +2,7 @@
 #include <iostream>
 #include "ConfigHandler.h"
 #include "provider/WeatherProviderFactory.h"
+#include "GeoIPResolver.h"
 
 using namespace std;
 using namespace weatherpp;
@@ -21,6 +22,7 @@ void showHelp(char* name)
 
 int main(int argc, char* argv[])
 {
+	auto currentLocation = GeoIPResolver::getLocationAsync();
 	ConfigHandler configHandler;
 	if(configHandler.configure(argc, argv))
 	{
@@ -38,7 +40,8 @@ int main(int argc, char* argv[])
 			IWeatherProvider* provider = WeatherProviderFactory::create(configuration.weatherProvider);
 			if (provider)
 			{
-				auto weatherData = provider->getWeather("", configuration.location, configuration.apiKey);
+				auto location = !configuration.location.empty() ? configuration.location : currentLocation.get().city;
+				auto weatherData = provider->getWeather("", location, configuration.apiKey);
 				cout << weatherData->get_short_presentation() << endl;
 				delete weatherData;
 			}
