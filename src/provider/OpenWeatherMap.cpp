@@ -25,6 +25,7 @@ namespace weatherpp
 		.set_query(U("q=" + web::uri::encode_data_string(location)))
 		.append_query("appid=" + apiKey)
 		.append_query("units=metric");
+		cout << builder.to_string();
 		return http_client(U(builder.to_string()))
 			.request(methods::GET)
 			.then([=](const http_response& response)

@@ -10,10 +10,13 @@ void showHelp(char* name)
 {
 	cout << "Usage: " << name << " [option(s)] [LOCATION]\n"
 		 << "Options:\n"
-		 << "\t-h,--help\t\tShow this help message\n"
-		 << "\t-p,--provider PROVIDER\tSpecify the weather provider name"
-		 << "\t-a,--apikey API-KEY\tSpecify the weather provider's API key"
-		 << endl;
+		 << "\t-h, --help\t\tShow this help message\n"
+		 << "\t-p, --provider <PROVIDER>\tSpecify the weather provider name\n"
+		 << "\t-a, --apikey <API-KEY>\t\tSpecify the weather provider's API key\n"
+		 << "\t-u, --units <UNITS>\t\tSpecify \"metric\" or \"imperial\" - metric is set by default\n"
+		 << "\t-s, --save-configuration \tSave passed arguments in configuration file\n"
+
+		<< endl;
 }
 
 int main(int argc, char* argv[])
@@ -27,10 +30,15 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			IWeatherProvider* provider = WeatherProviderFactory::create("openweathermap");
+			auto configuration = configHandler.getConfiguration();
+			if (configuration.isSaveConfig)
+			{
+				configHandler.createConfigFile(configuration);
+			}
+			IWeatherProvider* provider = WeatherProviderFactory::create(configuration.weatherProvider);
 			if (provider)
 			{
-				auto weatherData = provider->getWeather("", configHandler.getLocation(), configHandler.getApiKey());
+				auto weatherData = provider->getWeather("", configuration.location, configuration.apiKey);
 				cout << weatherData->get_short_presentation() << endl;
 				delete weatherData;
 			}

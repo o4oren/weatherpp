@@ -1,18 +1,27 @@
 #ifndef WEATHERPP_SRC_CONFIGHANDLER_H
 #define WEATHERPP_SRC_CONFIGHANDLER_H
 #include <string>
+using std::string;
 
 namespace weatherpp
 {
+	struct Configuration
+	{
+		string weatherProvider;
+		string apiKey;
+		string location;
+		string units;
+		bool isSaveConfig = false;
+	};
+
 	class ConfigHandler
 	{
 	private:
-		std::string mWeatherProviderName, mApiKey, mLocation;
 		static constexpr const char* CONFIG_FILE_NAME = ".weatherpp";
 		void parseArgs(int argc, char* argv[]);
-		bool parseConfigFile(const std::string& cfgFile);
-		static bool createConfigFile(std::string& cfgFile, std::string& provider, std::string& apiKey);
-		static std::string getConfigFilePath();
+		bool parseConfigFile(const string& cfgFile);
+		static string getConfigFilePath();
+		Configuration configuration;
 
 	public:
 		/**
@@ -23,9 +32,8 @@ namespace weatherpp
 		 */
 		bool configure(int argc, char* argv[]);
 		bool isShowHelp = false;
-		std::string getLocation() { return mLocation; };
-		std::string getWeatherProviderName() { return mWeatherProviderName; };
-		std::string getApiKey() { return mApiKey; };
+		const Configuration& getConfiguration();
+		static bool createConfigFile(const Configuration &configuration);
 	};
 }
 

@@ -12,17 +12,9 @@ namespace weatherpp
 	{
 		parseArgs(argc, argv);
 		string cfgFile = getConfigFilePath();
-		bool isCfgParsed = parseConfigFile(cfgFile);
-		if (!isCfgParsed && !mWeatherProviderName.empty() && !mApiKey.empty())
-		{
-			createConfigFile(cfgFile, mWeatherProviderName, mApiKey);
-		}
-
-		if (!mWeatherProviderName.empty() && !mApiKey.empty())
-		{
-			return true;
-		}
-		return false;
+		parseConfigFile(cfgFile);
+		// config is valid if provider and api key are set
+		return !configuration.weatherProvider.empty() && !configuration.apiKey.empty();
 	}
 
 	void ConfigHandler::parseArgs(int argc, char** argv)
@@ -38,32 +30,44 @@ namespace weatherpp
 			{
 				if (i + 1 < argc)
 				{
-					mWeatherProviderName = argv[++i];
+					configuration.weatherProvider = argv[++i];
 				}
 			}
 			else if ((arg == "-a") || (arg == "--apikey"))
 			{
 				if (i + 1 < argc)
 				{
-					mApiKey = argv[++i];
+					configuration.apiKey = argv[++i];
 				}
+			}
+			else if ((arg == "-u") || (arg == "--units"))
+			{
+				if (i + 1 < argc)
+				{
+					string unitsString = argv[++i];
+					configuration.units = unitsString == "imperial" ? "imperial" : "metric";
+				}
+			}
+			else if ((arg == "-s") || (arg == "--save-configuration"))
+			{
+				configuration.isSaveConfig = true;
 			}
 			else
 			{
-				if (mLocation.empty())
+				if (configuration.location.empty())
 				{
-					mLocation = argv[i];
+					configuration.location = argv[i];
 				}
 				else
 				{
-					mLocation.append(" ").append(argv[i]);
+					configuration.location.append(" ").append(argv[i]);
 				}
 			}
 		}
 	}
 
 	/**
-	 * @param cfgFile - reference to string denoting the path tothe cfg file;
+	 * @param cfgFile - reference to string denoting the path to the cfg file;
 	 * @return true if successfully read configuration.
 	 */
 	bool ConfigHandler::parseConfigFile(const string& cfgFile)
@@ -81,13 +85,21 @@ namespace weatherpp
 				line.erase(0, pos + 1);
 				string value = line;
 
-				if (key == "provider" && mWeatherProviderName.empty())
+				if (configuration.weatherProvider.empty() && key == "provider")
 				{
-					mWeatherProviderName = value;
+					configuration.weatherProvider = value;
 				}
-				if (key == "apikey" && mApiKey.empty())
+				if (configuration.apiKey.empty() && key == "apikey")
 				{
-					mApiKey = value;
+					configuration.apiKey = value;
+				}
+				if (configuration.location.empty() && key == "location")
+				{
+					configuration.location = value;
+				}
+				if (configuration.units.empty() && key == "units")
+				{
+					configuration.units = value;
 				}
 			}
 			return true;
@@ -106,11 +118,15 @@ namespace weatherpp
 	 * @param apiKey weather provider api key
 	 * @return true if successfully written config
 	 */
-	bool ConfigHandler::createConfigFile(string& cfgFile, string& provider, string& apiKey)
+	bool ConfigHandler::createConfigFile(const Configuration &config)
 	{
-		ofstream out(cfgFile);
-		out << "provider=" << provider << endl;
-		out << "apikey=" << apiKey << endl;
+		ofstream out(getConfigFilePath());
+		out << "provider=" << config.weatherProvider << endl;
+		out << "apikey=" << config.apiKey << endl;
+		out << "location=" << config.location << endl;
+		if (!config.units.empty())
+			out << "units=" << config.units << endl;
+
 		if (out.good()) {
 			return true;
 		}
@@ -123,5 +139,9 @@ namespace weatherpp
 		string homeDir = getenv("HOME");
 		string pathSeperator = "/";
 		return homeDir + pathSeperator + CONFIG_FILE_NAME;
+	}
+	const Configuration& ConfigHandler::getConfiguration()
+	{
+		return configuration;
 	}
 }

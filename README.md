@@ -8,9 +8,19 @@ It only works on POSIX compliant machines at this point.
 Usage: ./weatherpp -provider openweathermap -a [API KEY] LOCATION_NAME
 
 ## Configuration
-The program checks for the existence of a configuration file named .weatherpp in the user's home directory.
-If such file does not exist, the help message will be displayed. Weather provider and api key can be supplied in such
-file or via cli arguments.
+The program accept weather provider, api-key, location and other parameters via command line arguments.
+If the -s / --save-config argument is specified, the program will create a config file named .weatherpp in the user's 
+home directory.
+If a config file exists, the utility will not require subsequent settings, other than an optional location.
+You can always override the confguration by passing command line arguments and update the configuration by setting -s. 
+
+Configuration file is of the format:
+```
+provider=openweathermap
+apikey=XXXXXXXXXX
+location=london
+units=metric
+```
 
 ## Dependencies
 Microsoft's rest SDK - https://github.com/microsoft/cpprestsdk
