@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include "ConfigHandler.h"
-#include "provider/OpenWeatherMap.h"
+#include "provider/WeatherProviderFactory.h"
 
 using namespace std;
 using namespace weatherpp;
@@ -27,12 +27,15 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			cout << "location " << configHandler.getLocation() << endl;
-			cout << "provider: " << configHandler.getWeatherProviderName() << endl;
-			cout << "api-key: " << configHandler.getApiKey() << endl;
-
-			OpenWeatherMap m;
-			m.httpGet("", configHandler.getLocation(), configHandler.getApiKey()).wait();
+			IWeatherProvider* provider = WeatherProviderFactory::create("openweathermap");
+			if (provider)
+			{
+				auto weatherData = provider->getWeather("", configHandler.getLocation(), configHandler.getApiKey());
+				cout << weatherData->get_short_presentation() << endl;
+				delete weatherData;
+			}
+			provider = nullptr;
+			delete provider;
 		}
 	}
 	else

@@ -17,7 +17,11 @@ Microsoft's rest SDK - https://github.com/microsoft/cpprestsdk
 
 ## TODO
 - [ ] Support geo IP location (so there is no need to state location)
-- [ ] Create a provider interface and factory to enable generic support for multiple weather providers
-- [ ] Tidy data presentation
+- [x] Create a provider interface and factory to enable generic support for multiple weather providers
+- [x] Tidy data presentation
 - [ ] Refactor providers and configuration to support multiple vendors
 - [ ] Support MS Windows
+- [ ] Complete data presentation
+- [ ] Provide "graphic" (ASCII) representation
+- [ ] Add weather forecast to data (Currently shows only current weather)
+- [ ] Add Config/cli argument to control metric/imperial system

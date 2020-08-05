@@ -11,7 +11,7 @@ namespace weatherpp
 		static constexpr const char* CONFIG_FILE_NAME = ".weatherpp";
 		void parseArgs(int argc, char* argv[]);
 		bool parseConfigFile(const std::string& cfgFile);
-		bool createConfigFile(std::string& cfgFile, std::string& provider, std::string& apiKey);
+		static bool createConfigFile(std::string& cfgFile, std::string& provider, std::string& apiKey);
 		static std::string getConfigFilePath();
 
 	public:

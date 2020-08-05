@@ -1,7 +1,3 @@
-//
-// Created by oren on 03/08/2020.
-//
-
 #ifndef WEATHERPP_SRC_PROVIDER_OPENWEATHERMAP_H
 #define WEATHERPP_SRC_PROVIDER_OPENWEATHERMAP_H
 
@@ -11,14 +7,20 @@
 #include <cpprest/json.h>
 #include <cpprest/uri_builder.h>
 #include <cpprest/http_client.h>
+#include "IWeatherProvider.h"
 
-namespace weatherpp {
-	class OpenWeatherMap
+using std::string;
+
+namespace weatherpp
+{
+	class OpenWeatherMap: public IWeatherProvider
 	{
 	public:
-		pplx::task<void> httpGet(std::string url);
-
-		pplx::task<void> httpGet(std::string url, std::string location, std::string apiKey);
+		WeatherData* getWeather(const string& url, const string& apiKey) override;
+		WeatherData* getWeather(const string& url, const string& location, const string& apiKey) override;
+		virtual ~OpenWeatherMap() {};
+	private:
+		WeatherData* generateWeatherData(web::json::value json);
 	};
 }
 
