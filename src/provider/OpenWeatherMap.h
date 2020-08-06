@@ -8,7 +8,7 @@
 #include <cpprest/uri_builder.h>
 #include <cpprest/http_client.h>
 #include "IWeatherProvider.h"
-
+using namespace web;
 using std::string;
 
 namespace weatherpp
@@ -16,11 +16,13 @@ namespace weatherpp
 	class OpenWeatherMap: public IWeatherProvider
 	{
 	public:
-		WeatherData* getWeather(const string& url, const string& apiKey) override;
-		WeatherData* getWeather(const string& url, const string& location, const string& apiKey) override;
-		virtual ~OpenWeatherMap() {};
+		WeatherData* getWeather(const string& url,
+			const string& location,
+			const string& apiKey,
+			const string& units) override;
+		~OpenWeatherMap() override {};
 	private:
-		WeatherData* generateWeatherData(web::json::value json);
+		WeatherData* generateWeatherData(json::value json);
 	};
 }
 

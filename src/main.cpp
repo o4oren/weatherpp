@@ -15,7 +15,6 @@ void showHelp(char* name)
 		 << "\t-p, --provider <PROVIDER>\tSpecify the weather provider name\n"
 		 << "\t-a, --apikey <API-KEY>\t\tSpecify the weather provider's API key\n"
 		 << "\t-u, --units <UNITS>\t\tSpecify \"metric\" or \"imperial\" - metric is set by default\n"
-		 << "\t-d, --default-location <LOCATION>\t\tSpecify a default location to be used\n"
 		 << "\t-s, --save-configuration \tSave passed arguments in configuration file\n"
 
 		<< endl;
@@ -41,14 +40,13 @@ int main(int argc, char* argv[])
 			IWeatherProvider* provider = WeatherProviderFactory::create(configuration.weatherProvider);
 			if (provider)
 			{
-				auto location = !configuration.location.empty() ? configuration.location :
-					configuration.defaultLocation.empty() ? currentLocation.get().city : configuration.defaultLocation;
-				auto weatherData = provider->getWeather("", location, configuration.apiKey);
+				auto location = !configuration.location.empty() ? configuration.location : currentLocation.get().city;
+				auto weatherData = provider->getWeather("", location, configuration.apiKey, configuration.units);
 				cout << weatherData->getShortRepresentation() << endl;
 				delete weatherData;
 			}
-			delete provider;
 			provider = nullptr;
+			delete provider;
 		}
 	}
 	else

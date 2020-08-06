@@ -34,7 +34,7 @@ namespace weatherpp
 		bool configure(int argc, char* argv[]);
 		bool isShowHelp = false;
 		const Configuration& getConfiguration();
-		static bool createConfigFile(const Configuration &configuration);
+		bool createConfigFile(const Configuration &configuration);
 	};
 }
 

@@ -2,19 +2,23 @@
 #define WEATHERPP_SRC_PROVIDER_WEATHERDATA_H
 #include <string>
 #include <ctime>
+using std::string;
 
 class WeatherData
 {
 public:
+	string units;
 	int clouds;
 	double latitude;
 	double longitude;
 	time_t timestamp;
-	std::string city;
-	std::string country;
+	string city;
+	string country;
 	int humidity;
 	int pressure;
 	int temp;
+	int max;
+	int min;
 	int feelsLike;
 	int visibility;
 	time_t sunrise;
@@ -22,7 +26,8 @@ public:
 	std::string description;
 	int windDegrees;
 	double windSpeed;
-	std::string getShortRepresentation();
+	string getShortRepresentation();
+	const string getDegreesSymbol(string units);
 };
 
 #endif //WEATHERPP_SRC_PROVIDER_WEATHERDATA_H
