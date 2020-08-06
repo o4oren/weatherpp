@@ -22,4 +22,5 @@ jobs:
           mkdir cmake-build-debug
           cd cmake-build-debug
           cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" ..
-          cmake --build .
+      - name: cmake build
+        run: cmake --build .
