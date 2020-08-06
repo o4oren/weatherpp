@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install cmake
-        run: apt-get install cmake
+        run: sudo apt-get install cmake
       - name: install restsdk
-        run: apt-get install libcpprest-dev
+        run: sudo apt-get install libcpprest-dev
       - name: cmake configure
         run: |
           mkdir cmake-build-debug
