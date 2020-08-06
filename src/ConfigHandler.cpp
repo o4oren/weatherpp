@@ -48,6 +48,13 @@ namespace weatherpp
 					configuration.units = unitsString == "imperial" ? "imperial" : "metric";
 				}
 			}
+			else if ((arg == "-d") || (arg == "--default-location"))
+			{
+				if (i + 1 < argc)
+				{
+					configuration.defaultLocation = argv[++i];
+				}
+			}
 			else if ((arg == "-s") || (arg == "--save-configuration"))
 			{
 				configuration.isSaveConfig = true;
@@ -93,9 +100,9 @@ namespace weatherpp
 				{
 					configuration.apiKey = value;
 				}
-				if (configuration.location.empty() && key == "location")
+				if (key == "defaultLocation")
 				{
-					configuration.location = value;
+					configuration.defaultLocation = value;
 				}
 				if (configuration.units.empty() && key == "units")
 				{
@@ -123,7 +130,7 @@ namespace weatherpp
 		ofstream out(getConfigFilePath());
 		out << "provider=" << config.weatherProvider << endl;
 		out << "apikey=" << config.apiKey << endl;
-		out << "location=" << config.location << endl;
+		out << "defaultLocation=" << config.defaultLocation << endl;
 		if (!config.units.empty())
 			out << "units=" << config.units << endl;
 

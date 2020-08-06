@@ -22,7 +22,7 @@ public:
 	std::string description;
 	int windDegrees;
 	double windSpeed;
-	std::string get_short_presentation();
+	std::string getShortRepresentation();
 };
 
 #endif //WEATHERPP_SRC_PROVIDER_WEATHERDATA_H

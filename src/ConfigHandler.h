@@ -10,6 +10,7 @@ namespace weatherpp
 		string weatherProvider;
 		string apiKey;
 		string location;
+		string defaultLocation;
 		string units;
 		bool isSaveConfig = false;
 	};

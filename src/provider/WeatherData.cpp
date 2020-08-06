@@ -1,7 +1,7 @@
 #include "WeatherData.h"
 using namespace std;
 
-string WeatherData::get_short_presentation()
+string WeatherData::getShortRepresentation()
 {
 	// TODO investigate why this is working here, but not directly inline
 	string sunRiseString = asctime(localtime(&sunrise));

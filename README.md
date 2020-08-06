@@ -31,7 +31,8 @@ Options:
 	-h, --help		Show this help message
 	-p, --provider <PROVIDER>	Specify the weather provider name
 	-a, --apikey <API-KEY>		Specify the weather provider's API key
-	-u, --units <UNITS>		Specify "metric" or "imperial" - metric is set by default
+	-u, --units <UNITS>		    Specify "metric" or "imperial" - metric is set by default
+    -d, --default-location <LOCATION> Specify a default location to be used
 	-s, --save-configuration 	Save passed arguments in configuration file
 
 ```
