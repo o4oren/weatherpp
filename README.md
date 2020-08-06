@@ -1,7 +1,12 @@
 ## WeatherPP
 A command line weather tool written in C++.
 
-This is a first naive implementation of a command line tool to query and display weather data.
+<a href="https://scan.coverity.com/projects/o4oren-weatherpp">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/21573/badge.svg"/>
+</a>
+![C++ CI](https://github.com/o4oren/<weatherpp/workflows/C++%20CI/badge.svg)
+Weatherpp is a command line tool to query and display weather data.
 At this point in can only use the openweathermap service, and displays the result as a raw json text.
 It only works on POSIX compliant machines at this point.
 
@@ -41,16 +46,19 @@ Options:
 If a location is not provided, the utility will attempt to locate your location through the http://ip-api.com service.
 
 ## To build
+weatherpp uses cmake as its build tool.
+```
+# to set up cmake run from whithin the project root directory:
+cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" .
+# To build
+cmake --build . --target all -- -j 3
+```
 
 ### Requirements
 * Install Microsoft's rest SDK - as per instructions at https://github.com/microsoft/cpprestsdk.
 Currently, this is the only external dependency of this project.
-* CMake version > 3.17
+* CMake version >= 3.16
 
-Use cmake to build the tool:
-```
-cmake --build .
-```
 
 ## TODO
 - [x] Support geo IP location (so there is no need to state location)
