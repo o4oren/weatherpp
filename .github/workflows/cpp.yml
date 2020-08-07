@@ -1,0 +1,28 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install cmake
+        run: sudo apt-get install cmake
+      - name: install restsdk
+        run: sudo apt-get install libcpprest-dev
+      - name: cmake configure
+        run: |
+          mkdir cmake-build-debug
+          cd cmake-build-debug
+          cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" ..
+      - name: cmake build
+        run: |
+          cd cmake-build-debug
+          cmake --build . --target weatherpp
