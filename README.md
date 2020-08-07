@@ -1,11 +1,7 @@
 ## WeatherPP
 A command line weather tool written in C++.
 
-<a href="https://scan.coverity.com/projects/o4oren-weatherpp">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/21573/badge.svg"/>
-</a>
-![C++ CI](https://github.com/o4oren/<weatherpp/workflows/C++%20CI/badge.svg)
+![C++ CI](https://github.com/o4oren/weatherpp/workflows/C++%20CI/badge.svg)
 Weatherpp is a command line tool to query and display weather data.
 At this point in can only use the openweathermap service, and displays the result as a raw json text.
 It only works on POSIX compliant machines at this point.
