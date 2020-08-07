@@ -22,7 +22,7 @@ string WeatherData::getShortRepresentation()
 	return s;
 }
 
-const string WeatherData::getDegreesSymbol(string units)
+string WeatherData::getDegreesSymbol(string &units)
 {
 	string s = units == "imperial" ? "\u2109" :  "\u2103";
 	return s;

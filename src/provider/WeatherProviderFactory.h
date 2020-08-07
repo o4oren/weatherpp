@@ -8,8 +8,6 @@ namespace weatherpp
 	{
 	public:
 		static IWeatherProvider* create(const std::string&);
-	private:
-		std::vector<IWeatherProvider*> weatherProviders;
 	};
 }
 

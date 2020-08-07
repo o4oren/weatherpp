@@ -21,7 +21,7 @@ namespace weatherpp
 		static constexpr const char* CONFIG_FILE_NAME = ".weatherpp";
 		void parseArgs(int argc, char* argv[]);
 		bool parseConfigFile(const string& cfgFile);
-		static string getConfigFilePath();
+		string getConfigFilePath();
 		Configuration configuration;
 
 	public:
@@ -35,6 +35,12 @@ namespace weatherpp
 		bool isShowHelp = false;
 		const Configuration& getConfiguration();
 		bool createConfigFile(const Configuration &configuration);
+		const string os =
+		#ifdef _WIN32
+			"windows";
+		#else
+			"unix";
+		#endif
 	};
 }
 

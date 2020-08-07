@@ -1,6 +1,5 @@
 #include "WeatherProviderFactory.h"
 #include "OpenWeatherMap.h"
-#include "IWeatherProvider.h"
 using std::string;
 
 namespace weatherpp

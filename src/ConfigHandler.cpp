@@ -1,9 +1,12 @@
 #include "ConfigHandler.h"
-#include <string>
 #include <iostream>
 #include <fstream>
 
-using namespace std;
+using std::ifstream;
+using std::ofstream;
+using std::cout;
+using std::cerr;
+using std::endl;
 using namespace weatherpp;
 
 namespace weatherpp
@@ -128,8 +131,8 @@ namespace weatherpp
 	bool ConfigHandler::createConfigFile(const Configuration &config)
 	{
 		ofstream out(getConfigFilePath());
-		out << "provider=" << config.weatherProvider << endl;
-		out << "apikey=" << config.apiKey << endl;
+		out << "provider=" << config.weatherProvider << "\n";
+		out << "apikey=" << config.apiKey << "\n";
 		out << "defaultLocation=" << config.defaultLocation << endl;
 		if (!config.units.empty())
 			out << "units=" << config.units << endl;
@@ -142,11 +145,16 @@ namespace weatherpp
 
 	string ConfigHandler::getConfigFilePath()
 	{
-		// TODO make platform independent
 		string homeDir = getenv("HOME");
-		string pathSeperator = "/";
-		return homeDir + pathSeperator + CONFIG_FILE_NAME;
+		string separator = "/";
+		if (os == "windows")
+		{
+			homeDir = getenv("USERPROFILE");
+			separator = "\\";
+		}
+		return homeDir + separator + CONFIG_FILE_NAME;
 	}
+
 	const Configuration& ConfigHandler::getConfiguration()
 	{
 		return configuration;

@@ -27,7 +27,7 @@ public:
 	int windDegrees;
 	double windSpeed;
 	string getShortRepresentation();
-	const string getDegreesSymbol(string units);
+	static string getDegreesSymbol(string &units);
 };
 
 #endif //WEATHERPP_SRC_PROVIDER_WEATHERDATA_H

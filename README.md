@@ -43,20 +43,21 @@ Options:
 ```
 If a location is not provided, the utility will attempt to locate your location through the http://ip-api.com service.
 
-## To build
-weatherpp uses cmake as its build tool.
+### Requirements
+There are no requirements for running the binary.
+For building:
+* Install Microsoft's rest SDK - as per instructions at https://github.com/microsoft/cpprestsdk.
+Currently, this is the only external dependency of this project.
+* CMake version >= 3.16
+
+## Build
+weatherpp uses cmake as its build tool, run the following after installing the requirements.
 ```
 # to set up cmake run from whithin the project root directory:
 cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" .
 # To build
 cmake --build . --target all -- -j 3
 ```
-
-### Requirements
-* Install Microsoft's rest SDK - as per instructions at https://github.com/microsoft/cpprestsdk.
-Currently, this is the only external dependency of this project.
-* CMake version >= 3.16
-
 
 ## TODO for 1.0
 - [x] Support geo IP location (so there is no need to state location)

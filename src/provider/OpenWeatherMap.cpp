@@ -15,7 +15,6 @@ using namespace pplx;
 
 namespace weatherpp
 {
-	string units;
 	WeatherData* OpenWeatherMap::getWeather(const string& url,
 		const string& location,
 		const string& apiKey,
@@ -53,10 +52,10 @@ namespace weatherpp
 			data->units = json.at("units").as_string();
 			data->city = json.at("name").as_string();
 			data->country = json.at("sys").at("country").as_string();
-			data->temp = json.at("main").at("temp").as_double();
+			data->temp = json.at("main").at("temp").as_integer();
 			data->pressure = json.at("main").at("pressure").as_integer();
-			data->humidity = json.at("main").at("humidity").as_double();
-			data->feelsLike = json.at("main").at("feels_like").as_double();
+			data->humidity = json.at("main").at("humidity").as_integer();
+			data->feelsLike = json.at("main").at("feels_like").as_integer();
 			data->clouds = json.at("clouds").at("all").as_integer();
 			data->windSpeed = json.at("wind").at("speed").as_double();
 			data->windDegrees = json.at("wind").at("deg").as_integer();
