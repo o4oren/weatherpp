@@ -25,4 +25,4 @@ jobs:
       - name: cmake build
         run: |
           cd cmake-build-debug
-          cmake --build .
+          cmake --build . --target weatherpp
