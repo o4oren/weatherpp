@@ -58,11 +58,11 @@ Currently, this is the only external dependency of this project.
 * CMake version >= 3.16
 
 
-## TODO
+## TODO for 1.0
 - [x] Support geo IP location (so there is no need to state location)
 - [x] Create a provider interface and factory to enable generic support for multiple weather providers
 - [x] Tidy data presentation
-- [ ] Integrate github actions for compilation/test upon push
+- [x] Integrate github actions for compilation/test upon push
 - [ ] Refactor providers and configuration to support multiple vendors
 - [ ] Support MS Windows
 - [ ] Complete data presentation
