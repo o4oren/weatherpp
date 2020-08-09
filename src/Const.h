@@ -5,6 +5,8 @@
 #ifndef WEATHERPP_SRC_CONST_H
 #define WEATHERPP_SRC_CONST_H
 #include <string>
+#include <cpprest/details/basic_types.h>
+
 using std::string;
 namespace weatherpp
 {
@@ -14,11 +16,10 @@ const string os =
 #else
     "unix";
 #endif
-const string DEGREES_SYMBOL = os =="windows" ? "\370 F" : "\u00B0";
-const string DEGREES_METRIC = "C";
-const string DEGREES_IMPERIAL = "F";
+
+const utility::string_t DEGREES_SYMBOL = os =="windows" ? U("") : U("\u00B0");
+const utility::string_t DEGREES_METRIC = DEGREES_SYMBOL + U("C");
+const utility::string_t DEGREES_IMPERIAL = U("F");
 }
-
-
 
 #endif // WEATHERPP_SRC_CONST_H

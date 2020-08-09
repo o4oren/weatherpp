@@ -8,20 +8,27 @@ using namespace weatherpp;
 
 string WeatherData::getShortRepresentation()
 {
-    // TODO investigate why this is working here, but not directly inline
-    string sunRiseString = asctime(localtime(&sunrise));
-    string sunSetString = asctime(localtime(&sunset));
+    const string_t END_LINE = U("\n");
+    string_t sunRiseString = to_string_t(asctime(localtime(&sunrise)));
+    string_t sunSetString = to_string_t(asctime(localtime(&sunset)));
 
-    string s = "Current weather at: " + city + ", " + country + "\n" + description + "\n" +
-               "cloud coverage: " + to_string(clouds) + "%\n" + "Temperature: " + to_string(temp) +
-               getDegreesSymbol(units) + "\n" + "Humidity: " + to_string(humidity) + "%\n" +
-               "Pressure: " + to_string(pressure) + " hPa\n" + "Feels like: " + to_string(feelsLike) +
-               getDegreesSymbol(units) + "\n" + "Wind direction: " + to_string(windDegrees) + " at " +
-               to_string(windSpeed) + " m/sec\n" + "Sunrise: " + sunRiseString + +"Sunset: " + sunSetString;
-    return s;
+    utility::ostringstream_t oss;
+    oss << U("Current weather at: ") << city << U(", ") << country << END_LINE
+        << description << END_LINE
+        << U("cloud coverage: ") << clouds << U("%\n")
+        << U("Temperature: ") << temp << getDegreesSymbol(units) << END_LINE
+        << U("Feels like: ") << feelsLike << getDegreesSymbol(units) << END_LINE
+        << U("Humidity: ") << humidity << U("%") << END_LINE
+        << U("Pressure: ") << pressure << U(" hPa") << END_LINE
+        << U("Wind direction: ") << windDegrees << U(" at ") << windSpeed << U(" m/sec") << END_LINE
+        << U("Sunrise: ") << sunRiseString
+        << U("Sunset: ") << sunSetString;
+
+    string_t s = oss.str();
+    return to_utf8string(s);
 }
 
-string WeatherData::getDegreesSymbol(const string &units)
+string_t WeatherData::getDegreesSymbol(const string_t &units)
 {
-    return DEGREES_SYMBOL + (units == "imperial" ? DEGREES_IMPERIAL : DEGREES_METRIC);
+    return units == U("imperial") ? to_string_t(DEGREES_IMPERIAL) : to_string_t(DEGREES_METRIC);
 }

@@ -9,7 +9,7 @@
 #include <pplx/pplxtasks.h>
 #include <string>
 using namespace web;
-using std::wstring;
+using std::string;
 
 namespace weatherpp
 {

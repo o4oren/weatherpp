@@ -26,7 +26,6 @@ void ConfigHandler::parseArgs(int argc, char **argv)
     for (int i = 1; i < argc; ++i)
     {
         string arg = argv[i];
-        cout << arg << endl;
 
         if ((arg == "-h") || (arg == "--help"))
         {
