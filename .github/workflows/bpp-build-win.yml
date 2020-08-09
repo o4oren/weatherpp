@@ -19,7 +19,7 @@ jobs:
         run: |
           md cmake-build-debug
           cd cmake-build-debug
-          cmake -DCMAKE_BUILD_TYPE=Debug ..
+          cmake -DCMAKE_BUILD_TYPE=Release ..
       - name: cmake build
         run: |
           cd cmake-build-debug
