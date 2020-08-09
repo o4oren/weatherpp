@@ -1,7 +1,7 @@
 
 ## WeatherPP
 
-![CI](https://github.com/o4oren/weatherpp/workflows/C++%20CI/badge.svg)
+![CI](https://github.com/o4oren/weatherpp/workflows/Build/badge.svg)
 
 weatherpp is a command line weather tool written in C++.
 
