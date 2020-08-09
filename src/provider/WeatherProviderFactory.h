@@ -4,11 +4,11 @@
 
 namespace weatherpp
 {
-	class WeatherProviderFactory
-	{
-	public:
-		static IWeatherProvider* create(const std::string&);
-	};
-}
+class WeatherProviderFactory
+{
+  public:
+    static IWeatherProvider *create(const std::string &);
+};
+} // namespace weatherpp
 
-#endif //WEATHERPP_SRC_PROVIDER_WEATHERPROVIDERFACTORY_H
+#endif // WEATHERPP_SRC_PROVIDER_WEATHERPROVIDERFACTORY_H

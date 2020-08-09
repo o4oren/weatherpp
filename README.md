@@ -65,7 +65,7 @@ cmake --build . --target all -- -j 3
 - [x] Tidy data presentation
 - [x] Integrate github actions for compilation/test upon push
 - [ ] Refactor providers and configuration to support multiple vendors
-- [ ] Support MS Windows
+- [x] Support MS Windows
 - [ ] Complete data presentation
 - [ ] Provide "graphic" (ASCII) representation
 - [ ] Add weather forecast to data (Currently shows only current weather)
