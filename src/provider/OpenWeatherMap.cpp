@@ -39,20 +39,25 @@ WeatherData *OpenWeatherMap::getWeather(const string &url, const string &locatio
 
 WeatherData *OpenWeatherMap::generateWeatherData(web::json::value json)
 {
+    /*
+     * Due to cpprestsdk's use of string_t we need to convert every json string value to utf_8 string, so it is
+     * parsed correctly into a standrd string on the WeatherData object.
+     */
     auto *data = new WeatherData;
-    data->units = json.at(U("units")).as_string();
-    data->city = json.at(U("name")).as_string();
-    data->country = json.at(U("sys")).at(U("country")).as_string();
+    data->units = to_utf8string(json.at(U("units")).as_string());
+    data->city = to_utf8string(json.at(U("name")).as_string());
+    data->country = to_utf8string(json.at(U("sys")).at(U("country")).as_string());
     data->temp = json.at(U("main")).at(U("temp")).as_integer();
     data->pressure = json.at(U("main")).at(U("pressure")).as_integer();
     data->humidity = json.at(U("main")).at(U("humidity")).as_integer();
     data->visibility = json.at(U("visibility")).as_integer();
     data->feelsLike = json.at(U("main")).at(U("feels_like")).as_integer();
-    data->clouds = json.at(U("clouds")).at(U("all")).as_integer();
+    data->cloudCoverage = json.at(U("clouds")).at(U("all")).as_integer();
     data->windSpeed = json.at(U("wind")).at(U("speed")).as_double();
     data->windDegrees = json.at(U("wind")).at(U("deg")).as_integer();
-    data->description = json.at(U("weather")).as_array()[0].at(U("description")).as_string();
-    data->icon = json.at(U("weather")).as_array()[0].at(U("main")).as_string();
+    data->windGustSpeed = json.at(U("wind")).has_field(U("gust")) ? json.at(U("wind")).at(U("gust")).as_double() : 0;
+    data->description = to_utf8string(json.at(U("weather")).as_array()[0].at(U("description")).as_string());
+    data->iconName = to_utf8string(json.at(U("weather")).as_array()[0].at(U("main")).as_string());
     data->sunrise = json.at(U("sys")).at(U("sunrise")).as_integer();
     data->sunset = json.at(U("sys")).at(U("sunset")).as_integer();
     return data;

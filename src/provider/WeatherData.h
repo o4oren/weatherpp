@@ -2,10 +2,7 @@
 #define WEATHERPP_SRC_PROVIDER_WEATHERDATA_H
 #include <ctime>
 #include <string>
-#include <cpprest/details/basic_types.h>
-
-using utility:: string_t;
-
+using std::string;
 /**
  * Class to represent the weather data returned from the provider.
  * Using cpprest's string_t to support cross platform, and prevent dealing with this when implementing a new provider.
@@ -14,28 +11,30 @@ using utility:: string_t;
 class WeatherData
 {
   public:
-    string_t units;
-    int clouds;
+    time_t timestamp;
+    string city;
+    string country;
     double latitude;
     double longitude;
-    time_t timestamp;
-    string_t city;
-    string_t country;
-    int humidity;
-    int pressure;
+    string units;
+    string description;
+    string iconName;
     int temp;
     int max;
     int min;
     int feelsLike;
+    int humidity;
+    int pressure;
+    int cloudCoverage;
+    int cloudCeiling;
     int visibility;
     time_t sunrise;
     time_t sunset;
-    string_t description;
     int windDegrees;
     double windSpeed;
-    string_t icon;
+    double windGustSpeed;
     std::string getShortRepresentation();
-    static string_t getDegreesSymbol(const string_t &units);
+    static string getDegreesSymbol(const string &units);
 };
 
 #endif // WEATHERPP_SRC_PROVIDER_WEATHERDATA_H

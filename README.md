@@ -68,7 +68,7 @@ cmake --build . --target weatherpp
 - [x] Integrate github workflows for compilation/test upon push
 - [x] Support MS Windows
 - [ ] Add weather forecast to data (Currently shows only current weather)
-- [ ] Add tests, and update github workflows to run them
+- [ ] Add tests, update github workflows to run tests and cache vcpkg and cmake as needed
 - [ ] Complete data presentation
 - [ ] Provide "graphic" (ASCII) representation
 - [ ] Refactor providers and configuration to support multiple vendors

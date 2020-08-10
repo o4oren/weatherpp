@@ -35,6 +35,7 @@
 
 # CMake builds
 cmake-build-*/
+build/*
 
 .idea/*
 /cov-int/

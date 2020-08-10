@@ -26,3 +26,10 @@ jobs:
         run: |
           cd cmake-build-debug
           cmake --build . --target weatherpp
+      - name: test binary
+        env:
+          OWM_API_KEY: ${{ secrets.openweathermap_api_key }}
+        run: |
+          cd cmake-build-debug
+          cd Debug
+          ./weatherpp.exe -p openweathermap -a "$env:OWM_API_KEY"

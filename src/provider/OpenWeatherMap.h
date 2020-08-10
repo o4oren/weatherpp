@@ -21,7 +21,7 @@ class OpenWeatherMap : public IWeatherProvider
     ~OpenWeatherMap() override{};
 
   private:
-    WeatherData *generateWeatherData(json::value json);
+    WeatherData *generateWeatherData(json::value json) override;
 };
 } // namespace weatherpp
 

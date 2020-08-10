@@ -17,9 +17,10 @@ const string os =
     "unix";
 #endif
 
-const utility::string_t DEGREES_SYMBOL = os =="windows" ? U("") : U("\u00B0");
-const utility::string_t DEGREES_METRIC = DEGREES_SYMBOL + U("C");
-const utility::string_t DEGREES_IMPERIAL = U("F");
+const string DEGREES_SYMBOL = os =="windows" ? "\370" : "\u00B0";
+const string DEGREES_METRIC = DEGREES_SYMBOL + "C";
+const string DEGREES_IMPERIAL = DEGREES_SYMBOL + "F";
+const string WIND_SPEED_METRIC = "m/sec";
 }
 
 #endif // WEATHERPP_SRC_CONST_H
