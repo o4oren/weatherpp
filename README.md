@@ -1,7 +1,9 @@
 
 ## WeatherPP
 
-![CI](https://github.com/o4oren/weatherpp/workflows/Build/badge.svg)
+![CI](https://github.com/o4oren/weatherpp/workflows/Linux%20Build/badge.svg)
+![CI](https://github.com/o4oren/weatherpp/workflows/MacOS%20Build/badge.svg)
+![CI](https://github.com/o4oren/weatherpp/workflows/Windows%20Build/badge.svg)
 
 weatherpp is a command line weather tool written in C++.
 
@@ -63,11 +65,12 @@ cmake --build . --target weatherpp
 - [x] Support geo IP location (so there is no need to state location)
 - [x] Create a provider interface and factory to enable generic support for multiple weather providers
 - [x] Tidy data presentation
-- [x] Integrate github actions for compilation/test upon push
+- [x] Integrate github workflows for compilation/test upon push
 - [x] Support MS Windows
+- [ ] Add weather forecast to data (Currently shows only current weather)
+- [ ] Add tests, and update github workflows to run them
 - [ ] Complete data presentation
 - [ ] Provide "graphic" (ASCII) representation
-- [ ] Add weather forecast to data (Currently shows only current weather)
 - [ ] Refactor providers and configuration to support multiple vendors
 - [ ] Interactive mode
 - [x] Add Config/cli argument to control metric/imperial system

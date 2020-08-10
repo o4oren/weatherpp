@@ -1,4 +1,4 @@
-name: Build
+name: Windows Build
 
 on:
   push:
@@ -9,19 +9,19 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: install cmake
-        run: sudo apt-get install cmake
       - name: install restsdk
-        run: sudo apt-get install libcpprest-dev
+        run: |
+          vcpkg install cpprestsdk cpprestsdk:x64-windows
+          vcpkg integrate install
       - name: cmake configure
         run: |
-          mkdir cmake-build-debug
+          md cmake-build-debug
           cd cmake-build-debug
-          cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=c:\vcpkg\scripts\buildsystems\vcpkg.cmake ..
       - name: cmake build
         run: |
           cd cmake-build-debug

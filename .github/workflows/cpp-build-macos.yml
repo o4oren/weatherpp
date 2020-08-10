@@ -1,4 +1,4 @@
-name: Build Windows
+name: MacOS Build
 
 on:
   push:
@@ -9,17 +9,17 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v2
       - name: install restsdk
-        run: vcpkg install cpprestsdk cpprestsdk:x64-windows
+        run: brew install cpprestsdk
       - name: cmake configure
         run: |
-          md cmake-build-debug
+          mkdir cmake-build-debug
           cd cmake-build-debug
-          cmake -DCMAKE_BUILD_TYPE=Release ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl/ -G "CodeBlocks - Unix Makefiles" ..
       - name: cmake build
         run: |
           cd cmake-build-debug
