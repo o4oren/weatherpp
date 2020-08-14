@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
                 auto location = !configuration.location.empty() ? configuration.location : currentLocation.get().city;
                 auto weatherData = provider->getWeather("", location, configuration.apiKey, configuration.units);
                 cout << weatherData->getShortRepresentation() << endl;
+                cout << weatherData-> getShortForecastRepresentation() << endl;
                 delete weatherData;
             }
             // TODO handle error if provider is not resolved

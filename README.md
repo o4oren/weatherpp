@@ -4,6 +4,8 @@
 ![CI](https://github.com/o4oren/weatherpp/workflows/Linux%20Build/badge.svg)
 ![CI](https://github.com/o4oren/weatherpp/workflows/MacOS%20Build/badge.svg)
 ![CI](https://github.com/o4oren/weatherpp/workflows/Windows%20Build/badge.svg)
+![GitHub](https://img.shields.io/github/license/o4oren/weatherpp?color=blue)
+
 
 weatherpp is a command line weather tool written in C++.
 

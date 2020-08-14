@@ -21,6 +21,10 @@ const string DEGREES_SYMBOL = os =="windows" ? "\370" : "\u00B0";
 const string DEGREES_METRIC = DEGREES_SYMBOL + "C";
 const string DEGREES_IMPERIAL = DEGREES_SYMBOL + "F";
 const string WIND_SPEED_METRIC = "m/sec";
+const string WIND_SPEED_IMPERIAL = "mph";
+const string RAIN_MM_HOUR = "mm/hour";
+const string RAIN_INCH_HOUR = "in/hour";
+
 }
 
 #endif // WEATHERPP_SRC_CONST_H

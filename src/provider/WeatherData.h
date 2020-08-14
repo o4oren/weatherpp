@@ -2,6 +2,7 @@
 #define WEATHERPP_SRC_PROVIDER_WEATHERDATA_H
 #include <ctime>
 #include <string>
+#include <vector>
 using std::string;
 /**
  * Class to represent the weather data returned from the provider.
@@ -12,6 +13,7 @@ class WeatherData
 {
   public:
     time_t timestamp;
+    time_t tzOffset;
     string city;
     string country;
     double latitude;
@@ -28,13 +30,17 @@ class WeatherData
     int cloudCoverage;
     int cloudCeiling;
     int visibility;
-    time_t sunrise;
+	time_t sunrise;
     time_t sunset;
     int windDegrees;
     double windSpeed;
     double windGustSpeed;
+    std::vector<WeatherData*> forecast;
     std::string getShortRepresentation();
+	std::string getShortForecastRepresentation();
+    void applyTzOffset(long offset);
     static string getDegreesSymbol(const string &units);
+	static string getWindSpeedUnits(const string &units);
 };
 
 #endif // WEATHERPP_SRC_PROVIDER_WEATHERDATA_H

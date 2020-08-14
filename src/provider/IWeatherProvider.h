@@ -16,7 +16,7 @@ class IWeatherProvider
     ;
 
   private:
-    virtual WeatherData *generateWeatherData(web::json::value json) = 0;
+    virtual WeatherData *generateWeatherData(web::json::value json, bool isCurrent = true) = 0;
 };
 } // namespace weatherpp
 #endif // WEATHERPP_SRC_PROVIDER_IWEATHERPROVIDER_H

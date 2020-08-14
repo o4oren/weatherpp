@@ -16,12 +16,16 @@ namespace weatherpp
 class OpenWeatherMap : public IWeatherProvider
 {
   public:
-    WeatherData *getWeather(const string &url, const string &location, const string &apiKey,
+    WeatherData *getWeather(const string &jsonTaskResult, const string &location, const string &apiKey,
                             const string &units) override;
-    ~OpenWeatherMap() override{};
+    ~OpenWeatherMap() override= default;
 
   private:
-    WeatherData *generateWeatherData(json::value json) override;
+    WeatherData *generateWeatherData(json::value json, bool isCurrent = true) override;
+    pplx::task<WeatherData*> getCurrentWeather(const string &url, const string &location, const string &apiKey,
+        const string &units);
+    pplx::task<std::vector<WeatherData*>> getForecast(const string &url, const string &location, const string &apiKey,
+        const string &units);
 };
 } // namespace weatherpp
 

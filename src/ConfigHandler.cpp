@@ -17,6 +17,10 @@ bool ConfigHandler::configure(int argc, char **argv)
     parseArgs(argc, argv);
     string cfgFile = getConfigFilePath();
     parseConfigFile(cfgFile);
+
+    // If usints were not configured, we use metric by default.
+    configuration.units = configuration.units.empty() ? "metric" : configuration.units;
+
     // config is valid if provider and api key are set
     return !configuration.weatherProvider.empty() && !configuration.apiKey.empty();
 }
@@ -50,7 +54,7 @@ void ConfigHandler::parseArgs(int argc, char **argv)
             if (i + 1 < argc)
             {
                 string unitsString = argv[++i];
-                configuration.units = unitsString == "imperial" ? "imperial" : "metric";
+                configuration.units = unitsString;
             }
         }
         else if ((arg == "-d") || (arg == "--default-location"))
